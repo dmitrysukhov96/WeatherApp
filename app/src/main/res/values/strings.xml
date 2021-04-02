@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="settings">Settings</string>
+    <string name="main">Main</string>
+    <string name="nav_drawer_open">Navigation drawer opened</string>
+    <string name="nav_drawer_close">Navigation drawer closed</string>
+    <string name="temperature"></string>
+    <string name="celsius">℃</string>
+    <string name="state">Ясно</string>
+    <string name="city">Ваш город</string>
+    <string name="more">Подробнее</string>
+    <string name="sunrise_example">Восход 06:55</string>
+    <string name="sunset_example">Закат 17:28</string>
+    <string name="air_quality_index">Индекс качества воздуха</string>
+    <string name="example_air_quality">41</string>
+    <string name="info_by">Данные предоставлены</string>
+    <string name="weather_app">WeatherApp</string>
+    <string name="turn_on_gps_please">Пожалуйста, включите геолокацию</string>
+    <string name="text_circle">" • "</string>
+    <string name="accuweather_logo">accuweather logo</string>
+    <string name="main_activity">Main Activity</string>
+    <string name="settings_activity">Settings Activity</string>
+    <string name="gps_rationale">To work correctly, the app requires GPS permission.</string>
+    <string name="ok">ok</string>
+    <string name="cancel">cancel</string>
+    <string name="please_turn_on_gps">Please, turn on GPS</string>
+    <string name="no_thanks">No, thanks</string>
+
+    <string-array name="day_main">
+        <item>Сегодня</item>
+        <item>Завтра</item>
+        <item>Вс</item>
+    </string-array>
+
+    <string-array name="weather_main">
+        <item>Ветренно</item>
+        <item>Облачно</item>
+        <item>Ясно</item>
+    </string-array>
+
+    <string-array name="temperature_main">
+        <item>-2°/-6°</item>
+        <item>2°/0°</item>
+        <item>4°/-2°</item>
+    </string-array>
+
+    <string-array name="time_details">
+        <item>Сейчас</item>
+        <item>16:00</item>
+        <item>17:00</item>
+        <item>17:28</item>
+        <item>18:00</item>
+    </string-array>
+
+    <string-array name="weather_details">
+        <item>-2°</item>
+        <item>-2°</item>
+        <item>-3°</item>
+        <item>Закат</item>
+        <item>-4°</item>
+    </string-array>
+
+    <string-array name="wind_speed_details">
+        <item>3.7 км/ч</item>
+        <item>4.1 км/ч</item>
+        <item>4.2 км/ч</item>
+        <item>4.2 км/ч</item>
+        <item>4.3 км/ч</item>
+    </string-array>
+</resources>

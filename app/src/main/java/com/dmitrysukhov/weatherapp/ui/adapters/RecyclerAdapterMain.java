@@ -16,14 +16,14 @@ public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMai
 
     Context context;
     private final String[] stringArrayAdapterDays;
-    private final String[] stringArrayAdapterWeather;
+    private final String[] stringArrayAdapterWeatherText;
     private final String[] stringArrayAdapterTemperature;
     int[] images;
 
     public RecyclerAdapterMain(Context ct, String[] s1, String[] s2, String[] s3, int[] img) {
         context = ct;
         stringArrayAdapterDays = s1;
-        stringArrayAdapterWeather = s2;
+        stringArrayAdapterWeatherText = s2;
         stringArrayAdapterTemperature = s3;
         images = img;
     }
@@ -39,9 +39,21 @@ public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMai
     @Override
     public void onBindViewHolder(FirstViewHolder viewHolder, final int position) {
         viewHolder.textViewDay.setText(stringArrayAdapterDays[position]);
-        viewHolder.textViewState.setText(String.format("%s%s", viewHolder.textViewState.getText().toString(), stringArrayAdapterWeather[position]));
+        viewHolder.textViewState.setText(String.format("%s%s", viewHolder.textViewState.getText().toString(), stringArrayAdapterWeatherText[position]));
         viewHolder.textViewTemperature.setText(stringArrayAdapterTemperature[position]);
-        viewHolder.iconWeather.setImageResource(images[position]);
+        if (images[position]>=0 & images[position]<=5 || images[position]==30){
+            viewHolder.iconWeather.setImageResource(R.drawable.ic_sun);
+        } else if (images[position]>=6 & images[position]<=11){
+            viewHolder.iconWeather.setImageResource(R.drawable.ic_cloud);
+        } else if (images[position]>=12 & images[position]<=18){
+            viewHolder.iconWeather.setImageResource(R.drawable.rain);
+        } else if (images[position]==20 || images[position]==21 || images[position]==32){
+            viewHolder.iconWeather.setImageResource(R.drawable.ic_wind);
+        } else if (images[position]>=22 & images[position]<=29 || images[position]==31){
+            viewHolder.iconWeather.setImageResource(R.drawable.ic_snow);
+        } else if (images[position]>=33 & images[position]<=44){
+            viewHolder.iconWeather.setImageResource(R.drawable.ic_moon);
+        }
     }
 
     @Override

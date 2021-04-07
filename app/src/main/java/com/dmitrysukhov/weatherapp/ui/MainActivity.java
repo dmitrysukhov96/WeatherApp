@@ -3,6 +3,7 @@ package com.dmitrysukhov.weatherapp.ui;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -22,7 +23,6 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.dmitrysukhov.weatherapp.BuildConfig;
 import com.dmitrysukhov.weatherapp.R;
-import com.dmitrysukhov.weatherapp.model.CurrentWeatherWrapper;
 import com.dmitrysukhov.weatherapp.ui.adapters.ScreenSlidePagerAdapter;
 import com.dmitrysukhov.weatherapp.viewmodel.MainViewModel;
 
@@ -30,10 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
     private MainViewModel mainViewModel;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private SharedPreferences mySharedPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mySharedPrefs = getSharedPreferences("mySharedPrefs", Context.MODE_PRIVATE);
         setContentView(R.layout.activity_main);
         ViewPager2 viewPager = findViewById(R.id.view_pager_main_activity_container);
         FragmentStateAdapter pagerAdapter = new ScreenSlidePagerAdapter(this);
@@ -51,9 +53,11 @@ public class MainActivity extends AppCompatActivity {
                 mainViewModel.getCurrentWeatherLiveData(newLocationKey).observe
                         (MainActivity.this, currentWeatherWrapper -> {
                             swipeRefreshLayout.setRefreshing(false);
-                            ((TextView) findViewById(R.id.textView_main_fragment_index_of_air_quality))
-                                    .setText(mainViewModel.getLocalizedName());
-                            fillUIWithCurrentWeather(currentWeatherWrapper);
+                            mySharedPrefs.edit().putString(getString(R.string.current_city),mainViewModel.getLocalizedName())
+                                    .putString(getString(R.string.current_weather),currentWeatherWrapper.getWeatherText())
+                                    .putString(getString(R.string.current_temperature),
+                                    String.valueOf((int)currentWeatherWrapper.getTemperature().getMetric().getValue())).apply();
+                            fillUIWithCurrentWeather();
                         });
                 mainViewModel.getTwelveHoursWeatherLiveData(newLocationKey).observe
                         (MainActivity.this, twelveHoursWeatherWrapper -> {
@@ -61,16 +65,33 @@ public class MainActivity extends AppCompatActivity {
                         });
                 mainViewModel.getFiveDaysWeatherLiveData(newLocationKey).observe
                         (MainActivity.this, fiveDaysWeatherWrapper -> {
-                            //do smth with fivedaysweatherwrapper. set text etc
+                            mySharedPrefs.edit().putInt(getString(R.string.today_icon),fiveDaysWeatherWrapper.getDailyForecasts()[0].getDay().getIconNumber()).apply();
+                            mySharedPrefs.edit().putInt(getString(R.string.tomorrow_icon),fiveDaysWeatherWrapper.getDailyForecasts()[1].getDay().getIconNumber()).apply();
+                            mySharedPrefs.edit().putInt(getString(R.string.day_after_tomorrow_icon),fiveDaysWeatherWrapper.getDailyForecasts()[2].getDay().getIconNumber()).apply();
+                            mySharedPrefs.edit().putString(getString(R.string.today_weather_phrase),fiveDaysWeatherWrapper.getDailyForecasts()[0].getDay().getIconPhrase()).apply();
+                            mySharedPrefs.edit().putString(getString(R.string.tomorrow_weather_phrase),fiveDaysWeatherWrapper.getDailyForecasts()[0].getDay().getIconPhrase()).apply();
+                            mySharedPrefs.edit().putString(getString(R.string.day_after_tomorrow_weather_phrase),fiveDaysWeatherWrapper.getDailyForecasts()[0].getDay().getIconPhrase()).apply();
+                            mySharedPrefs.edit().putString(getString(R.string.today_temperature_minmax),
+                                    fiveDaysWeatherWrapper.getDailyForecasts()[0].getTemperature().getMinimum().getMinValue()+"° / "+
+                                            fiveDaysWeatherWrapper.getDailyForecasts()[0].getTemperature().getMaximum().getMaxValue()+"°").apply();
+                            mySharedPrefs.edit().putString(getString(R.string.tomorrow_temperature_minmax),
+                                    fiveDaysWeatherWrapper.getDailyForecasts()[1].getTemperature().getMinimum().getMinValue()+"° / "+
+                                            fiveDaysWeatherWrapper.getDailyForecasts()[1].getTemperature().getMaximum().getMaxValue()+"°").apply();
+                            mySharedPrefs.edit().putString(getString(R.string.day_after_tomorrow_temperature_minmax),
+                                    fiveDaysWeatherWrapper.getDailyForecasts()[2].getTemperature().getMinimum().getMinValue()+"° / "+
+                                            fiveDaysWeatherWrapper.getDailyForecasts()[2].getTemperature().getMaximum().getMaxValue()+"°").apply();
                         });
             });
         }
     }
 
-    private void fillUIWithCurrentWeather(CurrentWeatherWrapper currentWeatherWrapper) {
-        ((TextView) findViewById(R.id.textView_main_fragment_state)).setText(currentWeatherWrapper.getWeatherText());
-        double tempMetricVal = currentWeatherWrapper.getTemperature().getMetric().getValue();
-        ((TextView) findViewById(R.id.textView_main_fragment_temperature)).setText((String.valueOf((int) tempMetricVal)));
+    private void fillUIWithCurrentWeather() {
+        ((TextView) findViewById(R.id.textView_main_fragment_city))
+                .setText(mySharedPrefs.getString(getString(R.string.current_city),getString(R.string.your_city)));
+        ((TextView) findViewById(R.id.textView_main_fragment_state))
+                .setText(mySharedPrefs.getString(getString(R.string.current_weather),getString(R.string.swipe_to_refresh)));
+        ((TextView) findViewById(R.id.textView_main_fragment_temperature))
+                .setText(mySharedPrefs.getString(getString(R.string.current_temperature),getString(R.string.no_temperature)));
     }
 
 

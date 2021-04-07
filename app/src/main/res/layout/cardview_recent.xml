@@ -14,7 +14,8 @@
         android:id="@+id/constraint_layout_card_view_for_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/transparent">
+        android:background="@color/transparent"
+        tools:background="@color/cyan1">
 
         <ImageView
             android:id="@+id/image_view_card_view_icon_weather"
@@ -31,31 +32,34 @@
             android:id="@+id/text_view_card_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/standard_margin"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintStart_toEndOf="@+id/image_view_card_view_icon_weather"
+            android:textColor="@color/white"
+            card_view:layout_constraintBottom_toTopOf="@id/text_view_card_state"
+            card_view:layout_constraintStart_toStartOf="@+id/text_view_card_state"
             card_view:layout_constraintTop_toTopOf="parent"
-            android:textColor="@color/white"/>
+            tools:text="Today" />
 
         <TextView
             android:id="@+id/text_view_card_state"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:textColor="@color/white"
+            android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintStart_toEndOf="@+id/text_view_card_day"
+            card_view:layout_constraintStart_toEndOf="@+id/image_view_card_view_icon_weather"
             card_view:layout_constraintTop_toTopOf="parent"
-            android:text="@string/text_circle"/>
+            tools:text="Преимущественно облачно" />
 
         <TextView
             android:id="@+id/text_view_card_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/standard_margin"
+            android:textColor="@color/white"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
-            android:textColor="@color/white"/>
+            tools:text="-3/-5" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

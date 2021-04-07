@@ -56,10 +56,11 @@ public class WeatherRepository {
                 citySearchWrapperCall.enqueue(new Callback<CitySearchWrapper[]>() {
                     @Override
                     public void onResponse(Call<CitySearchWrapper[]> call, Response<CitySearchWrapper[]> response) {
+                        if (response.body()!=null){
                         currentCity = response.body()[0].getLocalizedName();
                         locationKey = response.body()[0].getKeyOfOurCity();  //325343
                         locationKeyLiveData.setValue(locationKey);
-                    }
+                    }}
 
                     @Override
                     public void onFailure(Call<CitySearchWrapper[]> call, Throwable t) {
@@ -80,11 +81,11 @@ public class WeatherRepository {
             currentWeatherWrapperCall.enqueue(new Callback<CurrentWeatherWrapper[]>() {
                 @Override
                 public void onResponse(Call<CurrentWeatherWrapper[]> call, Response<CurrentWeatherWrapper[]> response) {
-                    CurrentWeatherWrapper currentWeatherWrapper = response.body()[0];
-                    if (currentWeatherWrapper != null) {
-                        currentWeatherLiveData.setValue(currentWeatherWrapper);
+                    if (response.body() != null) {
+                        currentWeatherLiveData.setValue(response.body()[0]);
                     }
                 }
+
                 @Override
                 public void onFailure(Call<CurrentWeatherWrapper[]> call, Throwable t) {
                     Log.i(BuildConfig.LOG_TAG, t.toString());
@@ -99,15 +100,15 @@ public class WeatherRepository {
             ApiInterface apiInterface = RetrofitInstance.getApiService();
 
             Call<TwelveHoursWeatherWrapper[]> twelveHoursWeatherWrapperCall = apiInterface.getTwelveHoursWeatherData
-                    (newLocationKey, BuildConfig.API_KEY, BuildConfig.LANGUAGE, false,true);
+                    (newLocationKey, BuildConfig.API_KEY, BuildConfig.LANGUAGE, false, true);
             twelveHoursWeatherWrapperCall.enqueue(new Callback<TwelveHoursWeatherWrapper[]>() {
                 @Override
                 public void onResponse(Call<TwelveHoursWeatherWrapper[]> call, Response<TwelveHoursWeatherWrapper[]> response) {
-                    TwelveHoursWeatherWrapper twelveHoursWeatherWrapper = response.body()[0];
-                    if (twelveHoursWeatherWrapper != null) {
-                        twelveHoursWeatherLiveData.setValue(twelveHoursWeatherWrapper);
+                    if (response.body() != null) {
+                        twelveHoursWeatherLiveData.setValue(response.body()[0]);
                     }
                 }
+
                 @Override
                 public void onFailure(Call<TwelveHoursWeatherWrapper[]> call, Throwable t) {
                     Log.i(BuildConfig.LOG_TAG, t.toString());
@@ -122,15 +123,15 @@ public class WeatherRepository {
             ApiInterface apiInterface = RetrofitInstance.getApiService();
 
             Call<FiveDaysWeatherWrapper> fiveDaysWeatherData = apiInterface.getFiveDaysWeatherData
-                    (newLocationKey, BuildConfig.API_KEY, BuildConfig.LANGUAGE, false,true);
+                    (newLocationKey, BuildConfig.API_KEY, BuildConfig.LANGUAGE, false, true);
             fiveDaysWeatherData.enqueue(new Callback<FiveDaysWeatherWrapper>() {
                 @Override
                 public void onResponse(Call<FiveDaysWeatherWrapper> call, Response<FiveDaysWeatherWrapper> response) {
-                    FiveDaysWeatherWrapper fiveDaysWeatherWrapper = response.body();
-                    if (fiveDaysWeatherWrapper != null) {
-                        fiveDaysWeatherLiveData.setValue(fiveDaysWeatherWrapper);
+                    if (response.body() != null) {
+                        fiveDaysWeatherLiveData.setValue(response.body());
                     }
                 }
+
                 @Override
                 public void onFailure(Call<FiveDaysWeatherWrapper> call, Throwable t) {
                     Log.i(BuildConfig.LOG_TAG, t.toString());

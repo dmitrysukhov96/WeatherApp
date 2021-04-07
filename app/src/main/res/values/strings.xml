@@ -25,11 +25,28 @@
     <string name="cancel">cancel</string>
     <string name="please_turn_on_gps">Please, turn on GPS</string>
     <string name="no_thanks">No, thanks</string>
+    <string name="your_city">Ваш город</string>
+    <string name="current_city">current_city</string>
+    <string name="current_weather">current_weather</string>
+    <string name="current_temperature">current_temperature</string>
+    <string name="no_temperature">--</string>
+    <string name="swipe_to_refresh">Свайп вниз чтоб обновить данные</string>
+    <string name="today_weather_phrase">today_weather_phrase</string>
+    <string name="tomorrow_weather_phrase">tomorrow_weather_phrase</string>
+    <string name="nothing">--</string>
+    <string name="day_after_tomorrow_weather_phrase">day_after_tomorrow_weather_phrase</string>
+    <string name="today_weather_minmax">today_weather_minmax</string>
+    <string name="today_icon">today_icon</string>
+    <string name="tomorrow_icon">tomorrow_icon</string>
+    <string name="day_after_tomorrow_icon">day_after_tomorrow_icon</string>
+    <string name="today_temperature_minmax">today_temperature_minmax</string>
+    <string name="tomorrow_temperature_minmax">tomorrow_temperature_minmax</string>
+    <string name="day_after_tomorrow_temperature_minmax">day_after_tomorrow_temperature_minmax</string>
 
     <string-array name="day_main">
         <item>Сегодня</item>
         <item>Завтра</item>
-        <item>Вс</item>
+        <item>Послезавтра</item>
     </string-array>
 
     <string-array name="weather_main">

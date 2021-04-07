@@ -4,14 +4,14 @@ import com.google.gson.annotations.SerializedName;
 
 public class FiveDaysWeatherWrapper {
 
-    @SerializedName("Daily Forecasts")
+    @SerializedName("DailyForecasts")
     private DailyForecast[] dailyForecasts;
 
     public DailyForecast[] getDailyForecasts() {
         return dailyForecasts;
     }
 
-    private class DailyForecast {
+    public class DailyForecast {
         @SerializedName("Temperature")
         private Temperature temperature;
 
@@ -28,7 +28,7 @@ public class FiveDaysWeatherWrapper {
     }
 
 
-    private class Day {
+    public class Day {
         @SerializedName("Icon")
         private int iconNumber;
 
@@ -44,7 +44,7 @@ public class FiveDaysWeatherWrapper {
         }
     }
 
-    private class Temperature {
+    public class Temperature {
         @SerializedName("Minimum")
         private Minimum minimum;
         @SerializedName("Maximum")
@@ -59,7 +59,7 @@ public class FiveDaysWeatherWrapper {
         }
     }
 
-    private class Minimum {
+    public class Minimum {
         @SerializedName("Value")
         private double minValue;
 
@@ -68,7 +68,7 @@ public class FiveDaysWeatherWrapper {
         }
     }
 
-    private class Maximum {
+    public class Maximum {
         @SerializedName("Value")
         private double maxValue;
 

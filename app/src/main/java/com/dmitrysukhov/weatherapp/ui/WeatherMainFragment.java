@@ -1,5 +1,7 @@
 package com.dmitrysukhov.weatherapp.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,12 +20,12 @@ import com.dmitrysukhov.weatherapp.R;
 
 public class WeatherMainFragment extends Fragment {
 
-    int[] imagesAirCloudSun = {R.drawable.ic_sun,R.drawable.ic_cloud, R.drawable.rain,
-            R.drawable.ic_wind, R.drawable.ic_snow,R.drawable.ic_moon};
+    SharedPreferences mySharedPrefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mySharedPrefs = getContext().getSharedPreferences("mySharedPrefs", Context.MODE_PRIVATE);
     }
 
     @Override
@@ -38,10 +40,16 @@ public class WeatherMainFragment extends Fragment {
         RecyclerView recyclerViewMain = view.findViewById(R.id.recycler_view_main_fragment_recent_days);
 
         String[] stringArrayMainDays = getResources().getStringArray(R.array.day_main);
-        String[] stringArrayMainWeather = getResources().getStringArray(R.array.weather_main);
-        String[] stringArrayMainTemperature = getResources().getStringArray(R.array.temperature_main);
-
-        RecyclerAdapterMain recyclerAdapterMain = new RecyclerAdapterMain(requireContext(), stringArrayMainDays, stringArrayMainWeather, stringArrayMainTemperature, imagesAirCloudSun);
+        String[] stringArrayMainWeather = {mySharedPrefs.getString(getString(R.string.today_weather_phrase),getString(R.string.nothing)),
+                mySharedPrefs.getString(getString(R.string.tomorrow_weather_phrase),getString(R.string.nothing)),
+                mySharedPrefs.getString(getString(R.string.day_after_tomorrow_weather_phrase),getString(R.string.nothing))};
+        String[] stringArrayMainTemperature = {mySharedPrefs.getString(getString(R.string.today_temperature_minmax), getString(R.string.nothing)),
+                mySharedPrefs.getString(getString(R.string.tomorrow_temperature_minmax), getString(R.string.nothing)),
+                mySharedPrefs.getString(getString(R.string.day_after_tomorrow_temperature_minmax), getString(R.string.nothing))};
+        int[] intArrayMainIconNumber = {mySharedPrefs.getInt(getString(R.string.today_icon), 0),
+                mySharedPrefs.getInt(getString(R.string.tomorrow_icon), 0),
+                mySharedPrefs.getInt(getString(R.string.day_after_tomorrow_icon), 0)};
+        RecyclerAdapterMain recyclerAdapterMain = new RecyclerAdapterMain(requireContext(), stringArrayMainDays, stringArrayMainWeather, stringArrayMainTemperature, intArrayMainIconNumber);
         recyclerViewMain.setAdapter(recyclerAdapterMain);
         recyclerViewMain.setLayoutManager(new LinearLayoutManager(requireContext()));
 

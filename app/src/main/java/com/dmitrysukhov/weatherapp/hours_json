@@ -1,19 +1,10 @@
 [
   {
-    "DateTime": "2021-04-02T15:00:00+03:00",
-    "EpochDateTime": 1617364800,
     "WeatherIcon": 2,
     "IconPhrase": "Преимущественно ясно",
-    "HasPrecipitation": false,
-    "IsDaylight": true,
     "Temperature": {
-      "Value": 13.6,
-      "Unit": "C",
-      "UnitType": 17
-    },
-    "PrecipitationProbability": 7,
-    "MobileLink": "http://m.accuweather.com/ru/ua/odesa/325343/hourly-weather-forecast/325343?day=1&hbhhour=15&unit=c",
-    "Link": "http://www.accuweather.com/ru/ua/odesa/325343/hourly-weather-forecast/325343?day=1&hbhhour=15&unit=c"
+      "Value": 13.6
+    }
   },
   {
     "DateTime": "2021-04-02T16:00:00+03:00",

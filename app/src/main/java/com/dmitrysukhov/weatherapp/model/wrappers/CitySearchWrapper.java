@@ -1,4 +1,4 @@
-package com.dmitrysukhov.weatherapp.model;
+package com.dmitrysukhov.weatherapp.model.wrappers;
 
 import com.google.gson.annotations.SerializedName;
 

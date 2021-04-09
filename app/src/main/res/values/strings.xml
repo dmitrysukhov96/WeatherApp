@@ -11,7 +11,7 @@
     <string name="more">Подробнее</string>
     <string name="sunrise_example">Восход 06:55</string>
     <string name="sunset_example">Закат 17:28</string>
-    <string name="air_quality_index">Индекс качества воздуха</string>
+    <string name="cloud_cover">Облачность</string>
     <string name="example_air_quality">41</string>
     <string name="info_by">Данные предоставлены</string>
     <string name="weather_app">WeatherApp</string>
@@ -30,7 +30,7 @@
     <string name="current_weather">current_weather</string>
     <string name="current_temperature">current_temperature</string>
     <string name="no_temperature">--</string>
-    <string name="swipe_to_refresh">Свайп вниз чтоб обновить данные</string>
+    <string name="swipe_to_refresh">Свайп вниз, чтобы обновить</string>
     <string name="today_weather_phrase">today_weather_phrase</string>
     <string name="tomorrow_weather_phrase">tomorrow_weather_phrase</string>
     <string name="nothing">--</string>
@@ -42,6 +42,7 @@
     <string name="today_temperature_minmax">today_temperature_minmax</string>
     <string name="tomorrow_temperature_minmax">tomorrow_temperature_minmax</string>
     <string name="day_after_tomorrow_temperature_minmax">day_after_tomorrow_temperature_minmax</string>
+    <string name="updated">Обновлено:</string>
 
     <string-array name="day_main">
         <item>Сегодня</item>
@@ -49,39 +50,12 @@
         <item>Послезавтра</item>
     </string-array>
 
-    <string-array name="weather_main">
-        <item>Ветренно</item>
-        <item>Облачно</item>
-        <item>Ясно</item>
-    </string-array>
-
-    <string-array name="temperature_main">
-        <item>-2°/-6°</item>
-        <item>2°/0°</item>
-        <item>4°/-2°</item>
-    </string-array>
-
-    <string-array name="time_details">
-        <item>Сейчас</item>
-        <item>16:00</item>
-        <item>17:00</item>
-        <item>17:28</item>
-        <item>18:00</item>
-    </string-array>
-
-    <string-array name="weather_details">
-        <item>-2°</item>
-        <item>-2°</item>
-        <item>-3°</item>
-        <item>Закат</item>
-        <item>-4°</item>
-    </string-array>
-
-    <string-array name="wind_speed_details">
-        <item>3.7 км/ч</item>
-        <item>4.1 км/ч</item>
-        <item>4.2 км/ч</item>
-        <item>4.2 км/ч</item>
-        <item>4.3 км/ч</item>
+    <string-array name="grid_view_names">
+        <item>Ощущается</item>
+        <item>Влажность</item>
+        <item>Вероятность дождя</item>
+        <item>Давление</item>
+        <item>Скорость ветра</item>
+        <item>Индекс УФ</item>
     </string-array>
 </resources>

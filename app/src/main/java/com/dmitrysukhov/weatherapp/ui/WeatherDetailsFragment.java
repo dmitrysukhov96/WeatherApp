@@ -1,10 +1,13 @@
 package com.dmitrysukhov.weatherapp.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +21,8 @@ import com.dmitrysukhov.weatherapp.ui.adapters.RecyclerAdapterDetails;
 
 public class WeatherDetailsFragment extends Fragment {
 
-    int[] imagesSunMoon = {R.drawable.ic_sun,R.drawable.ic_sun,R.drawable.ic_sun,R.drawable.ic_moon_yellow,R.drawable.ic_moon_yellow};
+    private SharedPreferences mySharedPrefs;
+    private RecyclerAdapterDetails recyclerAdapterDetails;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,17 +38,21 @@ public class WeatherDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mySharedPrefs = getActivity().getSharedPreferences("mySharedPrefs", Context.MODE_PRIVATE);
+        ((TextView) view.findViewById(R.id.textview_details_cloud_cover)).setText(String.format(" %s", mySharedPrefs.getString("cloud_cover", getString(R.string.nothing))));
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_details_weather);
-
-        String[] stringArrayDetailsTime = getResources().getStringArray(R.array.time_details);
-        String[] stringArrayDetailsWeather = getResources().getStringArray(R.array.weather_details);
-        String[] stringArrayDetailsWindSpeed = getResources().getStringArray(R.array.wind_speed_details);
-
-        RecyclerAdapterDetails recyclerAdapterDetails = new RecyclerAdapterDetails(requireContext(), stringArrayDetailsTime, stringArrayDetailsWeather, stringArrayDetailsWindSpeed, imagesSunMoon);
+        String[] gridViewDetailsValues = {
+                mySharedPrefs.getString("real_feel_temperature", getString(R.string.nothing)),
+                mySharedPrefs.getString("relative_humidity", getString(R.string.nothing)),
+                mySharedPrefs.getString("precip", getString(R.string.nothing)),
+                mySharedPrefs.getString("pressure", getString(R.string.nothing)),
+                mySharedPrefs.getString("wind_speed", getString(R.string.nothing)),
+                mySharedPrefs.getString("uv_index", getString(R.string.nothing)),
+        };
+        recyclerAdapterDetails = new RecyclerAdapterDetails(requireContext());
         recyclerView.setAdapter(recyclerAdapterDetails);
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false));
-        GridView gridview = getView().findViewById(R.id.grid_view_details);
-        if (gridview!=null){
-        gridview.setAdapter(new GridViewAdapter(requireContext()));}
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+        GridView gridview = view.findViewById(R.id.grid_view_details);
+        gridview.setAdapter(new GridViewAdapter(requireContext(), gridViewDetailsValues));
     }
 }

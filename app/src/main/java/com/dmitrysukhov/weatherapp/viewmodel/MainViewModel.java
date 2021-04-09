@@ -2,12 +2,13 @@ package com.dmitrysukhov.weatherapp.viewmodel;
 
 import android.content.Context;
 
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dmitrysukhov.weatherapp.model.CurrentWeatherWrapper;
-import com.dmitrysukhov.weatherapp.model.FiveDaysWeatherWrapper;
-import com.dmitrysukhov.weatherapp.model.TwelveHoursWeatherWrapper;
+import com.dmitrysukhov.weatherapp.model.wrappers.CurrentWeatherWrapper;
+import com.dmitrysukhov.weatherapp.model.wrappers.FiveDaysWeatherWrapper;
+import com.dmitrysukhov.weatherapp.model.wrappers.TwelveHoursWeatherWrapper;
 import com.dmitrysukhov.weatherapp.model.WeatherRepository;
 
 public class MainViewModel extends ViewModel {
@@ -18,26 +19,35 @@ public class MainViewModel extends ViewModel {
     }
 
     public LiveData<String> getLocationKey(Context context) {
-        return weatherRepository.getLocationKey(context);
+        return weatherRepository.getLocationKey();
     }
 
-    public LiveData<CurrentWeatherWrapper> getCurrentWeatherLiveData(String newLocationKey) {
-        return weatherRepository.getCurrentWeatherLiveData(newLocationKey);
+    public LiveData<CurrentWeatherWrapper> getCurrentWeatherLiveData() {
+        return weatherRepository.getCurrentWeatherLiveData();
     }
 
     public String getLocalizedName() {
         return weatherRepository.getCurrentCity();
     }
 
-    public LiveData<TwelveHoursWeatherWrapper> getTwelveHoursWeatherLiveData(String newLocationKey) {
-        return weatherRepository.getTwelveHoursWeatherLiveData(newLocationKey);
+    public LiveData<TwelveHoursWeatherWrapper[]> getTwelveHoursWeatherLiveData() {
+        return weatherRepository.getTwelveHoursWeatherLiveData();
     }
 
-    public LiveData<FiveDaysWeatherWrapper> getFiveDaysWeatherLiveData(String newLocationKey) {
-        return weatherRepository.getFiveDaysWeatherLiveData(newLocationKey);
+    public LiveData<FiveDaysWeatherWrapper> getFiveDaysWeatherLiveData() {
+        return weatherRepository.getFiveDaysWeatherLiveData();
     }
 
-//    public MutableLiveData<OneDayWeatherWrapper> getOneDayWeatherLiveData() {
-//        return weatherRepository.getOneDayWeatherLiveData();
-//    }
+
+    public void getData(String locationKey) {
+        weatherRepository.getRecentData(locationKey);
+    }
+
+    public void getNewData(Context context) {
+        weatherRepository.getNewData(context);
+    }
+
+    public void sendThisLifecycle(Lifecycle lifecycle) {
+        weatherRepository.setThisLifecycle(lifecycle);
+    }
 }

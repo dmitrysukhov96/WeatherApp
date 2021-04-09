@@ -1,9 +1,9 @@
 package com.dmitrysukhov.weatherapp.network;
 
-import com.dmitrysukhov.weatherapp.model.CitySearchWrapper;
-import com.dmitrysukhov.weatherapp.model.CurrentWeatherWrapper;
-import com.dmitrysukhov.weatherapp.model.FiveDaysWeatherWrapper;
-import com.dmitrysukhov.weatherapp.model.TwelveHoursWeatherWrapper;
+import com.dmitrysukhov.weatherapp.model.wrappers.CitySearchWrapper;
+import com.dmitrysukhov.weatherapp.model.wrappers.CurrentWeatherWrapper;
+import com.dmitrysukhov.weatherapp.model.wrappers.FiveDaysWeatherWrapper;
+import com.dmitrysukhov.weatherapp.model.wrappers.TwelveHoursWeatherWrapper;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

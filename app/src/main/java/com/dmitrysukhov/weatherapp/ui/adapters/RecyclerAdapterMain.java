@@ -1,6 +1,7 @@
 package com.dmitrysukhov.weatherapp.ui.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dmitrysukhov.weatherapp.BuildConfig;
 import com.dmitrysukhov.weatherapp.R;
 
 public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMain.FirstViewHolder> {
@@ -18,14 +20,14 @@ public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMai
     private final String[] stringArrayAdapterDays;
     private final String[] stringArrayAdapterWeatherText;
     private final String[] stringArrayAdapterTemperature;
-    int[] images;
+    int[] imagesMainWeather;
 
     public RecyclerAdapterMain(Context ct, String[] s1, String[] s2, String[] s3, int[] img) {
         context = ct;
         stringArrayAdapterDays = s1;
         stringArrayAdapterWeatherText = s2;
         stringArrayAdapterTemperature = s3;
-        images = img;
+        imagesMainWeather = img;
     }
 
     @NonNull
@@ -39,26 +41,26 @@ public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMai
     @Override
     public void onBindViewHolder(FirstViewHolder viewHolder, final int position) {
         viewHolder.textViewDay.setText(stringArrayAdapterDays[position]);
-        viewHolder.textViewState.setText(String.format("%s%s", viewHolder.textViewState.getText().toString(), stringArrayAdapterWeatherText[position]));
+        viewHolder.textViewState.setText(String.format(stringArrayAdapterWeatherText[position]));
         viewHolder.textViewTemperature.setText(stringArrayAdapterTemperature[position]);
-        if (images[position]>=0 & images[position]<=5 || images[position]==30){
+        if (imagesMainWeather[position]>=0 & imagesMainWeather[position]<=5 || imagesMainWeather[position]==30){
             viewHolder.iconWeather.setImageResource(R.drawable.ic_sun);
-        } else if (images[position]>=6 & images[position]<=11){
+        } else if (imagesMainWeather[position]>=6 & imagesMainWeather[position]<=11){
             viewHolder.iconWeather.setImageResource(R.drawable.ic_cloud);
-        } else if (images[position]>=12 & images[position]<=18){
+        } else if (imagesMainWeather[position]>=12 & imagesMainWeather[position]<=18){
             viewHolder.iconWeather.setImageResource(R.drawable.rain);
-        } else if (images[position]==20 || images[position]==21 || images[position]==32){
+        } else if (imagesMainWeather[position]==20 || imagesMainWeather[position]==21 || imagesMainWeather[position]==32){
             viewHolder.iconWeather.setImageResource(R.drawable.ic_wind);
-        } else if (images[position]>=22 & images[position]<=29 || images[position]==31){
+        } else if (imagesMainWeather[position]>=22 & imagesMainWeather[position]<=29 || imagesMainWeather[position]==31){
             viewHolder.iconWeather.setImageResource(R.drawable.ic_snow);
-        } else if (images[position]>=33 & images[position]<=44){
+        } else if (imagesMainWeather[position]>=33 & imagesMainWeather[position]<=44){
             viewHolder.iconWeather.setImageResource(R.drawable.ic_moon);
         }
     }
 
     @Override
     public int getItemCount() {
-        return images.length;
+        return 3;
     }
 
     public static class FirstViewHolder extends RecyclerView.ViewHolder {

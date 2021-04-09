@@ -11,11 +11,13 @@ import com.dmitrysukhov.weatherapp.R;
 
 public class GridViewAdapter extends BaseAdapter {
     private final Context mContext;
-    public String[] gridViewDetailsNames = {"Ощущается","Влажность","Вероятность дождя","ДАВЛЕНИЕ","Скорость ветра","Индекс УФ"};
-    public String[] gridViewDetailsValues = {"-2℃","50%","0%","1031,00hPa","3,7 км/ч","2"};
+    public String[] gridViewDetailsNames;
+    public String[] gridViewDetailsValues;
 
-    public GridViewAdapter(Context c) {
+    public GridViewAdapter(Context c,String[] gridViewDetailsValues) {
         mContext = c;
+        this.gridViewDetailsValues = gridViewDetailsValues;
+        gridViewDetailsNames = c.getResources().getStringArray(R.array.grid_view_names);
     }
 
     public int getCount() {

@@ -127,4 +127,16 @@
             android:src="@drawable/ic_arrow" />
     </LinearLayout>
 
+    <TextView
+        android:textSize="@dimen/standard_text_size"
+        android:id="@+id/textView_main_updated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="@string/updated"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

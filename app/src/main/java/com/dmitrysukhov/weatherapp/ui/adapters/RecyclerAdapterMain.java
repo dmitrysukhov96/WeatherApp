@@ -1,6 +1,7 @@
 package com.dmitrysukhov.weatherapp.ui.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,21 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dmitrysukhov.weatherapp.BuildConfig;
 import com.dmitrysukhov.weatherapp.R;
+import com.dmitrysukhov.weatherapp.model.wrappers.FiveDaysWeatherWrapper;
 
 public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMain.FirstViewHolder> {
 
-    Context context;
-    private final String[] stringArrayAdapterDays;
-    private final String[] stringArrayAdapterWeatherText;
-    private final String[] stringArrayAdapterTemperature;
-    int[] imagesMainWeather;
+    private final String[] stringArrayMainDays;
+    private final FiveDaysWeatherWrapper fiveDaysWeatherWrapper;
 
-    public RecyclerAdapterMain(Context ct, String[] s1, String[] s2, String[] s3, int[] img) {
-        context = ct;
-        stringArrayAdapterDays = s1;
-        stringArrayAdapterWeatherText = s2;
-        stringArrayAdapterTemperature = s3;
-        imagesMainWeather = img;
+    public RecyclerAdapterMain(Context context, FiveDaysWeatherWrapper fiveDaysWeatherWrapper) {
+        this.fiveDaysWeatherWrapper = fiveDaysWeatherWrapper;
+        if (fiveDaysWeatherWrapper==null) Log.i(BuildConfig.LOG_TAG,"RecyclerAdapterMain constructor fiveDaysWeatherWrapper == null");
+        stringArrayMainDays = context.getResources().getStringArray(R.array.day_main);
     }
 
     @NonNull
@@ -40,21 +37,32 @@ public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMai
 
     @Override
     public void onBindViewHolder(FirstViewHolder viewHolder, final int position) {
-        viewHolder.textViewDay.setText(stringArrayAdapterDays[position]);
-        viewHolder.textViewState.setText(String.format(stringArrayAdapterWeatherText[position]));
-        viewHolder.textViewTemperature.setText(stringArrayAdapterTemperature[position]);
-        if (imagesMainWeather[position]>=0 & imagesMainWeather[position]<=5 || imagesMainWeather[position]==30){
+        viewHolder.textViewDay.setText(stringArrayMainDays[position]);
+        if (fiveDaysWeatherWrapper != null) {
+            Log.i(BuildConfig.LOG_TAG,"fiveDaysWeatherWrapper != null");
+            viewHolder.textViewState.setText(fiveDaysWeatherWrapper.getDailyForecasts()[position].getDay().getIconPhrase());
+            String cardTemperature = fiveDaysWeatherWrapper.getDailyForecasts()[position].getTemperature().getMinimum().getMinValue()
+                    + "° / " + fiveDaysWeatherWrapper.getDailyForecasts()[position].getTemperature().getMaximum().getMaxValue() + "°";
+            viewHolder.textViewTemperature.setText(cardTemperature);
+            int imagesMainWeather = fiveDaysWeatherWrapper.getDailyForecasts()[position].getDay().getIconNumber();
+            if (imagesMainWeather >= 0 & imagesMainWeather <= 5 || imagesMainWeather == 30) {
+                viewHolder.iconWeather.setImageResource(R.drawable.ic_sun);
+            } else if (imagesMainWeather >= 6 & imagesMainWeather <= 11) {
+                viewHolder.iconWeather.setImageResource(R.drawable.ic_cloud);
+            } else if (imagesMainWeather >= 12 & imagesMainWeather <= 18) {
+                viewHolder.iconWeather.setImageResource(R.drawable.rain);
+            } else if (imagesMainWeather == 20 || imagesMainWeather == 21 || imagesMainWeather == 32) {
+                viewHolder.iconWeather.setImageResource(R.drawable.ic_wind);
+            } else if (imagesMainWeather >= 22 & imagesMainWeather <= 29 || imagesMainWeather == 31) {
+                viewHolder.iconWeather.setImageResource(R.drawable.ic_snow);
+            } else if (imagesMainWeather >= 33 & imagesMainWeather <= 44) {
+                viewHolder.iconWeather.setImageResource(R.drawable.ic_moon);
+            }
+        }else{
+            Log.i(BuildConfig.LOG_TAG,"fiveDaysWeatherWrapper == null");
             viewHolder.iconWeather.setImageResource(R.drawable.ic_sun);
-        } else if (imagesMainWeather[position]>=6 & imagesMainWeather[position]<=11){
-            viewHolder.iconWeather.setImageResource(R.drawable.ic_cloud);
-        } else if (imagesMainWeather[position]>=12 & imagesMainWeather[position]<=18){
-            viewHolder.iconWeather.setImageResource(R.drawable.rain);
-        } else if (imagesMainWeather[position]==20 || imagesMainWeather[position]==21 || imagesMainWeather[position]==32){
-            viewHolder.iconWeather.setImageResource(R.drawable.ic_wind);
-        } else if (imagesMainWeather[position]>=22 & imagesMainWeather[position]<=29 || imagesMainWeather[position]==31){
-            viewHolder.iconWeather.setImageResource(R.drawable.ic_snow);
-        } else if (imagesMainWeather[position]>=33 & imagesMainWeather[position]<=44){
-            viewHolder.iconWeather.setImageResource(R.drawable.ic_moon);
+            viewHolder.textViewState.setText(R.string.nothing);
+            viewHolder.textViewTemperature.setText(R.string.nothing);
         }
     }
 

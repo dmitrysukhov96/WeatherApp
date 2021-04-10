@@ -165,7 +165,7 @@ public class CurrentWeatherWrapper {
 
     public static class MetricSpeedOfWind {
         @SerializedName("Value")
-        private int speedOfWindValue;
+        private double speedOfWindValue;
         @SerializedName("Unit")
         private String unitSpeedOfWind;
 

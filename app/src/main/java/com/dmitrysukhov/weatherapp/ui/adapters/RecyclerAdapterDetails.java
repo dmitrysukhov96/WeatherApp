@@ -1,8 +1,5 @@
 package com.dmitrysukhov.weatherapp.ui.adapters;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +9,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dmitrysukhov.weatherapp.BuildConfig;
 import com.dmitrysukhov.weatherapp.R;
+import com.dmitrysukhov.weatherapp.model.wrappers.TwelveHoursWeatherWrapper;
 
 import java.util.Calendar;
 
 public class RecyclerAdapterDetails extends RecyclerView.Adapter<RecyclerAdapterDetails.SecondViewHolder> {
 
-    Context context;
-    int[] imagesDetailsCards;
-    private SharedPreferences mySharedPrefs;
+    private final TwelveHoursWeatherWrapper[] twelveHoursWeatherWrapper;
 
-    public RecyclerAdapterDetails(Context ct) {
-        context = ct;
-        mySharedPrefs = ct.getSharedPreferences("mySharedPrefs", Context.MODE_PRIVATE);
+    public RecyclerAdapterDetails(TwelveHoursWeatherWrapper[] twelveHoursWeatherWrapper) {
+        this.twelveHoursWeatherWrapper = twelveHoursWeatherWrapper;
     }
 
     @NonNull
@@ -38,19 +32,20 @@ public class RecyclerAdapterDetails extends RecyclerView.Adapter<RecyclerAdapter
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapterDetails.SecondViewHolder viewHolder, final int position) {
-        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        String hourOfItem = hour+position+":00";
-        String temperature = mySharedPrefs.getString("twelve_temperatures_"+position,null)+"°";
+        int hour = (Calendar.getInstance().get(Calendar.HOUR_OF_DAY))+position;
+        if (hour>=24) hour = hour-24;
+        String hourOfItem = hour+":00";
         if (position == 0) {
             viewHolder.textViewDetailsTime.setText("Сейчас");
         } else {
             viewHolder.textViewDetailsTime.setText(hourOfItem);
         }
+        if (twelveHoursWeatherWrapper!=null){
+        String temperature = ((int)twelveHoursWeatherWrapper[position].getTemperature().getValue())+"°";
         viewHolder.textViewDetailsWeather.setText(temperature);
-        viewHolder.textViewDetailsIconPhrases.setText(mySharedPrefs.getString("twelve_icon_phrases_"+position,null));
+        viewHolder.textViewDetailsIconPhrases.setText(twelveHoursWeatherWrapper[position].getIconPhrase());
 
-        int icon = Integer.parseInt(mySharedPrefs.getString("twelve_weather_icons_"+position,null));
-        viewHolder.imageViewCardDetails.setImageResource(R.drawable.ic_sun);
+        int icon = twelveHoursWeatherWrapper[position].getWeatherIcon();
         if (icon>=0 & icon<=5 || icon==30){
             viewHolder.imageViewCardDetails.setImageResource(R.drawable.ic_sun);
         } else if (icon>=6 & icon<=11){
@@ -64,7 +59,7 @@ public class RecyclerAdapterDetails extends RecyclerView.Adapter<RecyclerAdapter
         } else if (icon>=33 & icon<=44){
             viewHolder.imageViewCardDetails.setImageResource(R.drawable.ic_moon);
         }
-    }
+    }}
 
     @Override
     public int getItemCount() {

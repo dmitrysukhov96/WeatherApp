@@ -1,108 +1,34 @@
 {
-  "Headline": {},
+  "Headline": {
+    "EffectiveDate": "2021-04-13T20:00:00+03:00",
+    "EffectiveEpochDate": 1618333200,
+    "Severity": 5,
+    "Text": "Вторник, вечер: ожидаются ливни",
+    "Category": "rain",
+    "EndDate": "2021-04-14T02:00:00+03:00",
+    "EndEpochDate": 1618354800,
+    "MobileLink": "http://m.accuweather.com/ru/ua/odesa/325343/extended-weather-forecast/325343?unit=c",
+    "Link": "http://www.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?unit=c"
+  },
   "DailyForecasts": [
     {
+      "Date": "2021-04-09T07:00:00+03:00",
+      "EpochDate": 1617940800,
       "Temperature": {
         "Minimum": {
-          "Value": 4.6
-        },
-        "Maximum": {
-          "Value": 13.7
-        }
-      },
-      "Day": {
-        "Icon": 4,
-        "IconPhrase": "Переменная облачность"
-      }
-    },
-    {
-      "Date": "2021-04-03T07:00:00+03:00",
-      "EpochDate": 1617422400,
-      "Temperature": {
-        "Minimum": {
-          "Value": 3.9,
+          "Value": 1.4,
           "Unit": "C",
           "UnitType": 17
         },
         "Maximum": {
-          "Value": 12.1,
+          "Value": 10.0,
           "Unit": "C",
           "UnitType": 17
         }
       },
       "Day": {
-        "Icon": 12,
-        "IconPhrase": "Ливни",
-        "HasPrecipitation": true,
-        "PrecipitationType": "Rain",
-        "PrecipitationIntensity": "Light"
-      },
-      "Night": {
-        "Icon": 18,
-        "IconPhrase": "Дождь",
-        "HasPrecipitation": true,
-        "PrecipitationType": "Rain",
-        "PrecipitationIntensity": "Light"
-      },
-      "Sources": [
-        "AccuWeather"
-      ],
-      "MobileLink": "http://m.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=2&unit=c",
-      "Link": "http://www.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=2&unit=c"
-    },
-    {
-      "Date": "2021-04-04T07:00:00+03:00",
-      "EpochDate": 1617508800,
-      "Temperature": {
-        "Minimum": {
-          "Value": 3.4,
-          "Unit": "C",
-          "UnitType": 17
-        },
-        "Maximum": {
-          "Value": 9.9,
-          "Unit": "C",
-          "UnitType": 17
-        }
-      },
-      "Day": {
-        "Icon": 12,
-        "IconPhrase": "Ливни",
-        "HasPrecipitation": true,
-        "PrecipitationType": "Rain",
-        "PrecipitationIntensity": "Light"
-      },
-      "Night": {
-        "Icon": 12,
-        "IconPhrase": "Ливни",
-        "HasPrecipitation": true,
-        "PrecipitationType": "Rain",
-        "PrecipitationIntensity": "Light"
-      },
-      "Sources": [
-        "AccuWeather"
-      ],
-      "MobileLink": "http://m.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=3&unit=c",
-      "Link": "http://www.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=3&unit=c"
-    },
-    {
-      "Date": "2021-04-05T07:00:00+03:00",
-      "EpochDate": 1617595200,
-      "Temperature": {
-        "Minimum": {
-          "Value": 4.4,
-          "Unit": "C",
-          "UnitType": 17
-        },
-        "Maximum": {
-          "Value": 10.3,
-          "Unit": "C",
-          "UnitType": 17
-        }
-      },
-      "Day": {
-        "Icon": 12,
-        "IconPhrase": "Ливни",
+        "Icon": 3,
+        "IconPhrase": "Небольшая облачность",
         "HasPrecipitation": true,
         "PrecipitationType": "Rain",
         "PrecipitationIntensity": "Light"
@@ -115,32 +41,125 @@
       "Sources": [
         "AccuWeather"
       ],
-      "MobileLink": "http://m.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=4&unit=c",
-      "Link": "http://www.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=4&unit=c"
+      "MobileLink": "http://m.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?unit=c",
+      "Link": "http://www.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?unit=c"
     },
     {
-      "Date": "2021-04-06T07:00:00+03:00",
-      "EpochDate": 1617681600,
+      "Date": "2021-04-10T07:00:00+03:00",
+      "EpochDate": 1618027200,
       "Temperature": {
         "Minimum": {
-          "Value": 4.5,
+          "Value": 2.3,
           "Unit": "C",
           "UnitType": 17
         },
         "Maximum": {
-          "Value": 11.2,
+          "Value": 11.6,
           "Unit": "C",
           "UnitType": 17
         }
       },
       "Day": {
-        "Icon": 6,
-        "IconPhrase": "Преимущественно облачно",
+        "Icon": 3,
+        "IconPhrase": "Небольшая облачность",
         "HasPrecipitation": false
       },
       "Night": {
-        "Icon": 36,
+        "Icon": 33,
+        "IconPhrase": "Ясно",
+        "HasPrecipitation": false
+      },
+      "Sources": [
+        "AccuWeather"
+      ],
+      "MobileLink": "http://m.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=1&unit=c",
+      "Link": "http://www.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=1&unit=c"
+    },
+    {
+      "Date": "2021-04-11T07:00:00+03:00",
+      "EpochDate": 1618113600,
+      "Temperature": {
+        "Minimum": {
+          "Value": 4.7,
+          "Unit": "C",
+          "UnitType": 17
+        },
+        "Maximum": {
+          "Value": 14.4,
+          "Unit": "C",
+          "UnitType": 17
+        }
+      },
+      "Day": {
+        "Icon": 7,
+        "IconPhrase": "Облачно",
+        "HasPrecipitation": false
+      },
+      "Night": {
+        "Icon": 35,
+        "IconPhrase": "Облачно с прояснениями",
+        "HasPrecipitation": false
+      },
+      "Sources": [
+        "AccuWeather"
+      ],
+      "MobileLink": "http://m.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=2&unit=c",
+      "Link": "http://www.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=2&unit=c"
+    },
+    {
+      "Date": "2021-04-12T07:00:00+03:00",
+      "EpochDate": 1618200000,
+      "Temperature": {
+        "Minimum": {
+          "Value": 6.5,
+          "Unit": "C",
+          "UnitType": 17
+        },
+        "Maximum": {
+          "Value": 14.6,
+          "Unit": "C",
+          "UnitType": 17
+        }
+      },
+      "Day": {
+        "Icon": 4,
         "IconPhrase": "Переменная облачность",
+        "HasPrecipitation": false
+      },
+      "Night": {
+        "Icon": 7,
+        "IconPhrase": "Облачно",
+        "HasPrecipitation": false
+      },
+      "Sources": [
+        "AccuWeather"
+      ],
+      "MobileLink": "http://m.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=3&unit=c",
+      "Link": "http://www.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=3&unit=c"
+    },
+    {
+      "Date": "2021-04-13T07:00:00+03:00",
+      "EpochDate": 1618286400,
+      "Temperature": {
+        "Minimum": {
+          "Value": 5.8,
+          "Unit": "C",
+          "UnitType": 17
+        },
+        "Maximum": {
+          "Value": 13.5,
+          "Unit": "C",
+          "UnitType": 17
+        }
+      },
+      "Day": {
+        "Icon": 7,
+        "IconPhrase": "Облачно",
+        "HasPrecipitation": false
+      },
+      "Night": {
+        "Icon": 7,
+        "IconPhrase": "Облачно",
         "HasPrecipitation": true,
         "PrecipitationType": "Rain",
         "PrecipitationIntensity": "Light"
@@ -148,9 +167,8 @@
       "Sources": [
         "AccuWeather"
       ],
-      "MobileLink": "http://m.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=5&unit=c",
-      "Link": "http://www.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=5&unit=c"
+      "MobileLink": "http://m.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=4&unit=c",
+      "Link": "http://www.accuweather.com/ru/ua/odesa/325343/daily-weather-forecast/325343?day=4&unit=c"
     }
   ]
 }
-

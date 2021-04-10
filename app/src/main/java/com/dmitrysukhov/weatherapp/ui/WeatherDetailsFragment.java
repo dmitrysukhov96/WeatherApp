@@ -7,26 +7,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
+import com.dmitrysukhov.weatherapp.model.wrappers.CurrentWeatherWrapper;
+import com.dmitrysukhov.weatherapp.model.wrappers.FiveDaysWeatherWrapper;
+import com.dmitrysukhov.weatherapp.model.wrappers.TwelveHoursWeatherWrapper;
 import com.dmitrysukhov.weatherapp.ui.adapters.GridViewAdapter;
 import com.dmitrysukhov.weatherapp.R;
 import com.dmitrysukhov.weatherapp.ui.adapters.RecyclerAdapterDetails;
+import com.dmitrysukhov.weatherapp.ui.adapters.RecyclerAdapterMain;
+import com.dmitrysukhov.weatherapp.viewmodel.MainViewModel;
 
 public class WeatherDetailsFragment extends Fragment {
 
-    private SharedPreferences mySharedPrefs;
+    private MainViewModel mainViewModel;
     private RecyclerAdapterDetails recyclerAdapterDetails;
+    private GridViewAdapter gridViewAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mainViewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
     }
 
     @Override
@@ -38,21 +48,28 @@ public class WeatherDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mySharedPrefs = getActivity().getSharedPreferences("mySharedPrefs", Context.MODE_PRIVATE);
-        ((TextView) view.findViewById(R.id.textview_details_cloud_cover)).setText(String.format(" %s", mySharedPrefs.getString("cloud_cover", getString(R.string.nothing))));
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_details_weather);
-        String[] gridViewDetailsValues = {
-                mySharedPrefs.getString("real_feel_temperature", getString(R.string.nothing)),
-                mySharedPrefs.getString("relative_humidity", getString(R.string.nothing)),
-                mySharedPrefs.getString("precip", getString(R.string.nothing)),
-                mySharedPrefs.getString("pressure", getString(R.string.nothing)),
-                mySharedPrefs.getString("wind_speed", getString(R.string.nothing)),
-                mySharedPrefs.getString("uv_index", getString(R.string.nothing)),
-        };
-        recyclerAdapterDetails = new RecyclerAdapterDetails(requireContext());
-        recyclerView.setAdapter(recyclerAdapterDetails);
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+        CurrentWeatherWrapper currentWeatherWrapper = mainViewModel.getCurrentWeatherLiveData().getValue();
+        TwelveHoursWeatherWrapper[] twelveHoursWeatherWrapper = mainViewModel.getTwelveHoursWeatherLiveData().getValue();
+        RecyclerView recyclerViewDetails = view.findViewById(R.id.recycler_view_details_weather);
+        recyclerAdapterDetails = new RecyclerAdapterDetails(twelveHoursWeatherWrapper);
+        recyclerViewDetails.setAdapter(recyclerAdapterDetails);
+        recyclerViewDetails.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         GridView gridview = view.findViewById(R.id.grid_view_details);
-        gridview.setAdapter(new GridViewAdapter(requireContext(), gridViewDetailsValues));
+        gridViewAdapter = new GridViewAdapter(requireContext(), currentWeatherWrapper);
+        gridview.setAdapter(gridViewAdapter);
+
+        mainViewModel.getCurrentWeatherLiveData().observe(getActivity(), this::updateUiWithCurrentWeatherData);
+        mainViewModel.getTwelveHoursWeatherLiveData().observe(getActivity(), this::updateUiWithTwelveHoursData);
+
+        if (currentWeatherWrapper!=null) ((TextView) view.findViewById(R.id.textview_details_cloud_cover))
+                .setText(String.valueOf(currentWeatherWrapper.getCloudCover()));
+    }
+
+    private void updateUiWithCurrentWeatherData(CurrentWeatherWrapper currentWeatherWrapper) {
+        gridViewAdapter.notifyDataSetChanged();
+    }
+
+    private void updateUiWithTwelveHoursData(TwelveHoursWeatherWrapper[] twelveHoursWeatherWrappers) {
+        recyclerAdapterDetails.notifyDataSetChanged();
     }
 }

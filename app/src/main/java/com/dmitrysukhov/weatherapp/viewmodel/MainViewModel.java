@@ -46,8 +46,4 @@ public class MainViewModel extends ViewModel {
     public void getNewData(Context context) {
         weatherRepository.getNewData(context);
     }
-
-    public void sendThisLifecycle(Lifecycle lifecycle) {
-        weatherRepository.setThisLifecycle(lifecycle);
-    }
 }

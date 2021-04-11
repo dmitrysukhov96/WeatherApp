@@ -2,14 +2,13 @@ package com.dmitrysukhov.weatherapp.viewmodel;
 
 import android.content.Context;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.dmitrysukhov.weatherapp.model.WeatherRepository;
 import com.dmitrysukhov.weatherapp.model.wrappers.CurrentWeatherWrapper;
 import com.dmitrysukhov.weatherapp.model.wrappers.FiveDaysWeatherWrapper;
 import com.dmitrysukhov.weatherapp.model.wrappers.TwelveHoursWeatherWrapper;
-import com.dmitrysukhov.weatherapp.model.WeatherRepository;
 
 public class MainViewModel extends ViewModel {
     private final WeatherRepository weatherRepository;

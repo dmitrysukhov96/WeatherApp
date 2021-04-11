@@ -16,7 +16,7 @@ import java.util.Calendar;
 
 public class RecyclerAdapterDetails extends RecyclerView.Adapter<RecyclerAdapterDetails.SecondViewHolder> {
 
-    private final TwelveHoursWeatherWrapper[] twelveHoursWeatherWrapper;
+    private TwelveHoursWeatherWrapper[] twelveHoursWeatherWrapper;
 
     public RecyclerAdapterDetails(TwelveHoursWeatherWrapper[] twelveHoursWeatherWrapper) {
         this.twelveHoursWeatherWrapper = twelveHoursWeatherWrapper;
@@ -32,38 +32,43 @@ public class RecyclerAdapterDetails extends RecyclerView.Adapter<RecyclerAdapter
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapterDetails.SecondViewHolder viewHolder, final int position) {
-        int hour = (Calendar.getInstance().get(Calendar.HOUR_OF_DAY))+position;
-        if (hour>=24) hour = hour-24;
-        String hourOfItem = hour+":00";
+        int hour = (Calendar.getInstance().get(Calendar.HOUR_OF_DAY)) + position;
+        if (hour >= 24) hour = hour - 24;
+        String hourOfItem = hour + ":00";
         if (position == 0) {
             viewHolder.textViewDetailsTime.setText("Сейчас");
         } else {
             viewHolder.textViewDetailsTime.setText(hourOfItem);
         }
-        if (twelveHoursWeatherWrapper!=null){
-        String temperature = ((int)twelveHoursWeatherWrapper[position].getTemperature().getValue())+"°";
-        viewHolder.textViewDetailsWeather.setText(temperature);
-        viewHolder.textViewDetailsIconPhrases.setText(twelveHoursWeatherWrapper[position].getIconPhrase());
+        if (twelveHoursWeatherWrapper != null) {
+            String temperature = ((int) twelveHoursWeatherWrapper[position].getTemperature().getValue()) + "°";
+            viewHolder.textViewDetailsWeather.setText(temperature);
+            viewHolder.textViewDetailsIconPhrases.setText(twelveHoursWeatherWrapper[position].getIconPhrase());
 
-        int icon = twelveHoursWeatherWrapper[position].getWeatherIcon();
-        if (icon>=0 & icon<=5 || icon==30){
-            viewHolder.imageViewCardDetails.setImageResource(R.drawable.ic_sun);
-        } else if (icon>=6 & icon<=11){
-            viewHolder.imageViewCardDetails.setImageResource(R.drawable.ic_cloud);
-        } else if (icon>=12 & icon<=18){
-            viewHolder.imageViewCardDetails.setImageResource(R.drawable.rain);
-        } else if (icon==20 || icon==21 || icon==32){
-            viewHolder.imageViewCardDetails.setImageResource(R.drawable.ic_wind);
-        } else if (icon>=22 & icon<=29 || icon==31){
-            viewHolder.imageViewCardDetails.setImageResource(R.drawable.ic_snow);
-        } else if (icon>=33 & icon<=44){
-            viewHolder.imageViewCardDetails.setImageResource(R.drawable.ic_moon);
+            int icon = twelveHoursWeatherWrapper[position].getWeatherIcon();
+            if (icon >= 0 & icon <= 5 || icon == 30) {
+                viewHolder.imageViewCardDetails.setImageResource(R.drawable.ic_sun);
+            } else if (icon >= 6 & icon <= 11) {
+                viewHolder.imageViewCardDetails.setImageResource(R.drawable.ic_cloud);
+            } else if (icon >= 12 & icon <= 18) {
+                viewHolder.imageViewCardDetails.setImageResource(R.drawable.rain);
+            } else if (icon == 20 || icon == 21 || icon == 32) {
+                viewHolder.imageViewCardDetails.setImageResource(R.drawable.ic_wind);
+            } else if (icon >= 22 & icon <= 29 || icon == 31) {
+                viewHolder.imageViewCardDetails.setImageResource(R.drawable.ic_snow);
+            } else if (icon >= 33 & icon <= 44) {
+                viewHolder.imageViewCardDetails.setImageResource(R.drawable.ic_moon);
+            }
         }
-    }}
+    }
 
     @Override
     public int getItemCount() {
         return 12;
+    }
+
+    public void setTwelweHoursWeather(TwelveHoursWeatherWrapper[] twelveHoursWeatherWrappers) {
+        this.twelveHoursWeatherWrapper = twelveHoursWeatherWrappers;
     }
 
     public static class SecondViewHolder extends RecyclerView.ViewHolder {

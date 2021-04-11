@@ -23,7 +23,7 @@ public class ScreenSlidePagerAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return position==0 ? weatherMainFragment: weatherDetailsFragment;
+        return position == 0 ? weatherMainFragment : weatherDetailsFragment;
     }
 
     @Override

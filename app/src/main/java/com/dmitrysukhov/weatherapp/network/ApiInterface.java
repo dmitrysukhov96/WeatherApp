@@ -22,10 +22,10 @@ public interface ApiInterface {
 
     @GET("./forecasts/v1/hourly/12hour/{locationKey}")
     Call<TwelveHoursWeatherWrapper[]> getTwelveHoursWeatherData(@Path("locationKey") String locationKey,
-                                                              @Query("apikey") String apiKey,
-                                                              @Query("language") String language,
-                                                              @Query("details") boolean details,
-                                                              @Query("metric") boolean metric);
+                                                                @Query("apikey") String apiKey,
+                                                                @Query("language") String language,
+                                                                @Query("details") boolean details,
+                                                                @Query("metric") boolean metric);
 
     @GET("./forecasts/v1/daily/5day/{locationKey}")
     Call<FiveDaysWeatherWrapper> getFiveDaysWeatherData(@Path("locationKey") String locationKey,

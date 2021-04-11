@@ -9,8 +9,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -24,9 +22,6 @@ import com.dmitrysukhov.weatherapp.network.RetrofitInstance;
 import com.dmitrysukhov.weatherapp.ui.MainActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.gson.Gson;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -102,6 +97,7 @@ public class WeatherRepository {
                     Log.i(BuildConfig.LOG_TAG, t.toString());
                 }
             });
+
             Call<TwelveHoursWeatherWrapper[]> twelveHoursWeatherWrapperCall = apiInterface.getTwelveHoursWeatherData
                     (newLocationKey, BuildConfig.API_KEY, BuildConfig.LANGUAGE, false, true);
             twelveHoursWeatherWrapperCall.enqueue(new Callback<TwelveHoursWeatherWrapper[]>() {
@@ -156,11 +152,12 @@ public class WeatherRepository {
                 citySearchWrapperCall.enqueue(new Callback<CitySearchWrapper[]>() {
                     @Override
                     public void onResponse(@NonNull Call<CitySearchWrapper[]> call, @NonNull Response<CitySearchWrapper[]> response) {
-                        if (response.body()!=null){
-                        currentCity = response.body()[0].getLocalizedName();
-                        locationKey = response.body()[0].getKeyOfOurCity();  //325343
-                        locationKeyLiveData.setValue(locationKey);
-                    }}
+                        if (response.body() != null) {
+                            currentCity = response.body()[0].getLocalizedName();
+                            locationKey = response.body()[0].getKeyOfOurCity();  //325343
+                            locationKeyLiveData.setValue(locationKey);
+                        }
+                    }
 
                     @Override
                     public void onFailure(@NonNull Call<CitySearchWrapper[]> call, @NonNull Throwable t) {

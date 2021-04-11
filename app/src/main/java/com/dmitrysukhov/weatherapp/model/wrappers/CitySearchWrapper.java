@@ -3,6 +3,7 @@ package com.dmitrysukhov.weatherapp.model.wrappers;
 import com.google.gson.annotations.SerializedName;
 
 public class CitySearchWrapper {
+
     public String getKeyOfOurCity() {
         return keyOfOurCity;
     }

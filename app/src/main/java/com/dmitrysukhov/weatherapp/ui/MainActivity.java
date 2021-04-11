@@ -3,12 +3,10 @@ package com.dmitrysukhov.weatherapp.ui;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,14 +18,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.dmitrysukhov.weatherapp.R;
-import com.dmitrysukhov.weatherapp.model.wrappers.CurrentWeatherWrapper;
-import com.dmitrysukhov.weatherapp.model.wrappers.FiveDaysWeatherWrapper;
-import com.dmitrysukhov.weatherapp.model.wrappers.TwelveHoursWeatherWrapper;
 import com.dmitrysukhov.weatherapp.ui.adapters.ScreenSlidePagerAdapter;
 import com.dmitrysukhov.weatherapp.viewmodel.MainViewModel;
-
-import java.text.DateFormat;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(fragmentStateAdapter);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout_main_container);
         swipeRefreshLayout.setOnRefreshListener(this::refreshData);
+        refreshData();
     }
 
     private void refreshData() {
@@ -59,6 +52,33 @@ public class MainActivity extends AppCompatActivity {
             methodState = checkGpsEnabled();
         }
         return methodState;
+    }
+
+    private boolean checkGpsPermission() {
+        boolean state = false;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            state = true;
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+        }
+        return state;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.gps_rationale)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.ok, (dialog, which) -> ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44)
+                    ).setNegativeButton(R.string.cancel, null)
+                    .show();
+        } else {
+            if (checkGpsEnabled()) mainViewModel.getNewData(this);
+        }
     }
 
     private boolean checkGpsEnabled() {
@@ -81,32 +101,6 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 65) {
             checkGpsEnabled();
-        }
-    }
-
-    private boolean checkGpsPermission() {
-        boolean state = false;
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            state = true;
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
-        }
-        return state;
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.gps_rationale)
-                    .setCancelable(false)
-                    .setPositiveButton(R.string.ok, (dialog, which) -> ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44)
-                    ).setNegativeButton(R.string.cancel, null)
-                    .show();
         }
     }
 }

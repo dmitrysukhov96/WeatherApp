@@ -24,14 +24,14 @@
             app:layout_constraintBottom_toTopOf="@+id/textView_main_fragment_state"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textView_main_fragment_temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="@string/temperature"
+                android:text="@string/nothing"
                 android:textColor="@color/white"
                 android:textSize="100sp" />
 
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/standard_margin"
-            android:text="@string/state"
+            android:text="@string/swipe_to_refresh"
             android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@id/card_view_main_fragment_index_of_air_quality"
@@ -75,16 +75,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView_main_fragment_state">
 
-                <TextView
-                    android:id="@+id/textView_main_fragment_city"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/little_margin"
-                    android:text="@string/city"
-                    android:drawablePadding="@dimen/smallest_padding"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/standard_text_size"
-                    android:gravity="center"/>
+            <TextView
+                android:id="@+id/textView_main_fragment_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/little_margin"
+                android:drawablePadding="@dimen/smallest_padding"
+                android:gravity="center"
+                android:text="@string/city"
+                android:textColor="@color/white"
+                android:textSize="@dimen/standard_text_size" />
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -97,8 +97,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/cardview_recent"
-        tools:itemCount="3"/>
+        tools:itemCount="3"
+        tools:listitem="@layout/cardview_recent" />
 
     <LinearLayout
         android:id="@+id/linearLayout_main_fragment_more_details"
@@ -116,8 +116,7 @@
             android:layout_gravity="center"
             android:text="@string/more"
             android:textColor="@color/white"
-            android:textSize="@dimen/little_text"
-            />
+            android:textSize="@dimen/little_text" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -128,13 +127,13 @@
     </LinearLayout>
 
     <TextView
-        android:textSize="@dimen/standard_text_size"
         android:id="@+id/textView_main_updated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:text="@string/updated"
         android:textColor="@color/white"
+        android:textSize="@dimen/standard_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -1,13 +1,10 @@
 package com.dmitrysukhov.weatherapp.ui;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,15 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
+import com.dmitrysukhov.weatherapp.R;
 import com.dmitrysukhov.weatherapp.model.wrappers.CurrentWeatherWrapper;
-import com.dmitrysukhov.weatherapp.model.wrappers.FiveDaysWeatherWrapper;
 import com.dmitrysukhov.weatherapp.model.wrappers.TwelveHoursWeatherWrapper;
 import com.dmitrysukhov.weatherapp.ui.adapters.GridViewAdapter;
-import com.dmitrysukhov.weatherapp.R;
 import com.dmitrysukhov.weatherapp.ui.adapters.RecyclerAdapterDetails;
-import com.dmitrysukhov.weatherapp.ui.adapters.RecyclerAdapterMain;
 import com.dmitrysukhov.weatherapp.viewmodel.MainViewModel;
 
 public class WeatherDetailsFragment extends Fragment {
@@ -61,15 +55,18 @@ public class WeatherDetailsFragment extends Fragment {
         mainViewModel.getCurrentWeatherLiveData().observe(getActivity(), this::updateUiWithCurrentWeatherData);
         mainViewModel.getTwelveHoursWeatherLiveData().observe(getActivity(), this::updateUiWithTwelveHoursData);
 
-        if (currentWeatherWrapper!=null) ((TextView) view.findViewById(R.id.textview_details_cloud_cover))
-                .setText(String.valueOf(currentWeatherWrapper.getCloudCover()));
+        if (currentWeatherWrapper != null)
+            ((TextView) view.findViewById(R.id.textview_details_cloud_cover))
+                    .setText(String.valueOf(currentWeatherWrapper.getCloudCover()));
     }
 
     private void updateUiWithCurrentWeatherData(CurrentWeatherWrapper currentWeatherWrapper) {
+        gridViewAdapter.setCurrentWeather(currentWeatherWrapper);
         gridViewAdapter.notifyDataSetChanged();
     }
 
     private void updateUiWithTwelveHoursData(TwelveHoursWeatherWrapper[] twelveHoursWeatherWrappers) {
+        recyclerAdapterDetails.setTwelweHoursWeather(twelveHoursWeatherWrappers);
         recyclerAdapterDetails.notifyDataSetChanged();
     }
 }

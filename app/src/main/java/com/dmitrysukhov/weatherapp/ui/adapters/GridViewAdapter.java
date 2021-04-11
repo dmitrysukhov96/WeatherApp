@@ -13,7 +13,7 @@ import com.dmitrysukhov.weatherapp.model.wrappers.CurrentWeatherWrapper;
 public class GridViewAdapter extends BaseAdapter {
     private final Context mContext;
     private final String[] gridViewDetailsNames;
-    private final CurrentWeatherWrapper currentWeatherWrapper;
+    private CurrentWeatherWrapper currentWeatherWrapper;
 
     public GridViewAdapter(Context c, CurrentWeatherWrapper currentWeatherWrapper) {
         mContext = c;
@@ -45,7 +45,7 @@ public class GridViewAdapter extends BaseAdapter {
         TextView textViewName = grid.findViewById(R.id.text_view_details_name);
         TextView textViewValue = grid.findViewById(R.id.text_view_details_value);
         textViewName.setText(gridViewDetailsNames[i]);
-        if (currentWeatherWrapper!=null) {
+        if (currentWeatherWrapper != null) {
             String[] valueStrings = {
                     String.valueOf(currentWeatherWrapper.getRealFeelTemperature().getMetricRealFeelTemperature().getValueRealFeel()),
                     String.valueOf(currentWeatherWrapper.getRelativeHumidity()),
@@ -54,7 +54,11 @@ public class GridViewAdapter extends BaseAdapter {
                     currentWeatherWrapper.getWind().getSpeedOfWind().getMetricSpeedOfWind().getValueAndUnitSpeedOfWind(),
                     String.valueOf(currentWeatherWrapper.getUVIndex())};
             textViewValue.setText(valueStrings[i]);
-        }else textViewValue.setText(R.string.nothing);
+        } else textViewValue.setText(R.string.nothing);
         return grid;
+    }
+
+    public void setCurrentWeather(CurrentWeatherWrapper currentWeatherWrapper) {
+        this.currentWeatherWrapper = currentWeatherWrapper;
     }
 }

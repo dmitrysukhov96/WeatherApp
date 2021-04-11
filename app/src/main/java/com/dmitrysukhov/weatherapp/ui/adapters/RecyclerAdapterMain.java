@@ -1,8 +1,6 @@
 package com.dmitrysukhov.weatherapp.ui.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +10,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dmitrysukhov.weatherapp.BuildConfig;
 import com.dmitrysukhov.weatherapp.R;
 import com.dmitrysukhov.weatherapp.model.wrappers.FiveDaysWeatherWrapper;
 
 public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMain.FirstViewHolder> {
 
     private final String[] stringArrayMainDays;
-    private final FiveDaysWeatherWrapper fiveDaysWeatherWrapper;
+    private FiveDaysWeatherWrapper fiveDaysWeatherWrapper;
 
     public RecyclerAdapterMain(Context context, FiveDaysWeatherWrapper fiveDaysWeatherWrapper) {
         this.fiveDaysWeatherWrapper = fiveDaysWeatherWrapper;
-        if (fiveDaysWeatherWrapper==null) Log.i(BuildConfig.LOG_TAG,"RecyclerAdapterMain constructor fiveDaysWeatherWrapper == null");
         stringArrayMainDays = context.getResources().getStringArray(R.array.day_main);
     }
 
@@ -39,12 +35,11 @@ public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMai
     public void onBindViewHolder(FirstViewHolder viewHolder, final int position) {
         viewHolder.textViewDay.setText(stringArrayMainDays[position]);
         if (fiveDaysWeatherWrapper != null) {
-            Log.i(BuildConfig.LOG_TAG,"fiveDaysWeatherWrapper != null");
-            viewHolder.textViewState.setText(fiveDaysWeatherWrapper.getDailyForecasts()[position].getDay().getIconPhrase());
-            String cardTemperature = fiveDaysWeatherWrapper.getDailyForecasts()[position].getTemperature().getMinimum().getMinValue()
-                    + "° / " + fiveDaysWeatherWrapper.getDailyForecasts()[position].getTemperature().getMaximum().getMaxValue() + "°";
+            viewHolder.textViewState.setText(fiveDaysWeatherWrapper.getDailyForecasts().get(position).getDay().getIconPhrase());
+            String cardTemperature = fiveDaysWeatherWrapper.getDailyForecasts().get(position).getTemperature().getMinimum().getMinValue()
+                    + "° / " + fiveDaysWeatherWrapper.getDailyForecasts().get(position).getTemperature().getMaximum().getMaxValue() + "°";
             viewHolder.textViewTemperature.setText(cardTemperature);
-            int imagesMainWeather = fiveDaysWeatherWrapper.getDailyForecasts()[position].getDay().getIconNumber();
+            int imagesMainWeather = fiveDaysWeatherWrapper.getDailyForecasts().get(position).getDay().getIconNumber();
             if (imagesMainWeather >= 0 & imagesMainWeather <= 5 || imagesMainWeather == 30) {
                 viewHolder.iconWeather.setImageResource(R.drawable.ic_sun);
             } else if (imagesMainWeather >= 6 & imagesMainWeather <= 11) {
@@ -58,8 +53,7 @@ public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMai
             } else if (imagesMainWeather >= 33 & imagesMainWeather <= 44) {
                 viewHolder.iconWeather.setImageResource(R.drawable.ic_moon);
             }
-        }else{
-            Log.i(BuildConfig.LOG_TAG,"fiveDaysWeatherWrapper == null");
+        } else {
             viewHolder.iconWeather.setImageResource(R.drawable.ic_sun);
             viewHolder.textViewState.setText(R.string.nothing);
             viewHolder.textViewTemperature.setText(R.string.nothing);
@@ -69,6 +63,10 @@ public class RecyclerAdapterMain extends RecyclerView.Adapter<RecyclerAdapterMai
     @Override
     public int getItemCount() {
         return 3;
+    }
+
+    public void setForecast(FiveDaysWeatherWrapper forecast) {
+        this.fiveDaysWeatherWrapper = forecast;
     }
 
     public static class FirstViewHolder extends RecyclerView.ViewHolder {

@@ -124,7 +124,7 @@ public class CurrentWeatherWrapper {
         }
     }
 
-    public class Pressure {
+    public static class Pressure {
         @SerializedName("Metric")
         private MetricPressure metricPressure;
 

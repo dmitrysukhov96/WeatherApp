@@ -2,16 +2,18 @@ package com.dmitrysukhov.weatherapp.model.wrappers;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class FiveDaysWeatherWrapper {
 
     @SerializedName("DailyForecasts")
-    private DailyForecast[] dailyForecasts;
+    private List<DailyForecast> dailyForecasts;
 
-    public DailyForecast[] getDailyForecasts() {
+    public List<DailyForecast> getDailyForecasts() {
         return dailyForecasts;
     }
 
-    public class DailyForecast {
+    public static class DailyForecast {
         @SerializedName("Temperature")
         private Temperature temperature;
 
@@ -28,7 +30,7 @@ public class FiveDaysWeatherWrapper {
     }
 
 
-    public class Day {
+    public static class Day {
         @SerializedName("Icon")
         private int iconNumber;
 
@@ -44,7 +46,7 @@ public class FiveDaysWeatherWrapper {
         }
     }
 
-    public class Temperature {
+    public static class Temperature {
         @SerializedName("Minimum")
         private Minimum minimum;
         @SerializedName("Maximum")
@@ -59,7 +61,7 @@ public class FiveDaysWeatherWrapper {
         }
     }
 
-    public class Minimum {
+    public static class Minimum {
         @SerializedName("Value")
         private double minValue;
 
@@ -68,7 +70,7 @@ public class FiveDaysWeatherWrapper {
         }
     }
 
-    public class Maximum {
+    public static class Maximum {
         @SerializedName("Value")
         private double maxValue;
 

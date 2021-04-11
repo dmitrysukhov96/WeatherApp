@@ -4,7 +4,7 @@
     <string name="main">Main</string>
     <string name="nav_drawer_open">Navigation drawer opened</string>
     <string name="nav_drawer_close">Navigation drawer closed</string>
-    <string name="temperature"></string>
+    <string name="temperature" />
     <string name="celsius">℃</string>
     <string name="state">Ясно</string>
     <string name="city">Ваш город</string>
@@ -21,8 +21,8 @@
     <string name="main_activity">Main Activity</string>
     <string name="settings_activity">Settings Activity</string>
     <string name="gps_rationale">To work correctly, the app requires GPS permission.</string>
-    <string name="ok">ok</string>
-    <string name="cancel">cancel</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
     <string name="please_turn_on_gps">Please, turn on GPS</string>
     <string name="no_thanks">No, thanks</string>
     <string name="your_city">Ваш город</string>

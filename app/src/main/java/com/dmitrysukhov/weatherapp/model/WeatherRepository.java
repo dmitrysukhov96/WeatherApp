@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.dmitrysukhov.weatherapp.BuildConfig;
 import com.dmitrysukhov.weatherapp.model.wrappers.CitySearchWrapper;
@@ -133,7 +134,12 @@ public class WeatherRepository {
     }
 
     public void getNewData(Context context) {
-        locationKeyLiveData.observe((MainActivity) context, this::getRecentData);
+        locationKeyLiveData.observe((MainActivity) context, new Observer<String>() {
+            @Override
+            public void onChanged(String newLocationKey) {
+                WeatherRepository.this.getRecentData(newLocationKey);
+            }
+        });
         getNewLocationKey(context);
     }
 
